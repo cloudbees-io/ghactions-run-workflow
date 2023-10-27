@@ -1,0 +1,98 @@
+= CloudBees action: Run a GitHub Actions workflow
+
+Use this action to trigger a GitHub Actions workflow. GitHub Actions (GHA) is an automation platform provided by GitHub.
+
+== Inputs
+
+[cols="2a,1a,1a,3a",options="header"]
+.Input details
+|===
+
+| Input name
+| Data type
+| Required?
+| Description
+
+| `url`
+| String
+| No
+| The GitHub server URL.
+If not specified, uses `https://api.github.com`.
+
+| `token`
+| String
+| Yes
+| The GitHub token.
+
+| `org-name`
+| String
+| Yes
+| The GitHub organization name.
+
+| `repo-name`
+| String
+| Yes
+| The GHA repository name.
+
+| `branch-name`
+| String
+| Yes
+| The GHA branch name.
+
+| `workflow-name`
+| String
+| Yes
+| The GHA workflow name.
+
+| `test-type`
+| String
+| No
+| Specifies the test type for generating a job test report.
+Supported test types are JUnit (`junit`) and TestNG (`testng`).
+
+| `test-result-location`
+| String
+| No
+| Specifies the test report file location.
+Accepts pattern matching, such as `my-dir/*/my-file`.
+
+| `parameters`
+| JSON
+| No
+| Any additional parameters, formatted as JSON data in key/value pairs.
+|===
+
+== Usage example
+
+In your YAML file, add:
+
+[source,yaml]
+----
+
+jobs:
+  run-gha-workflow:
+    steps:
+      - name: Run GHA workflow
+        uses: cloudbees.io/ghactions-run-workflow@v2
+        with:
+          url: ${{ vars.GITHUB_URL }}
+          token: ${{ secrets.GHA_TOKEN }}
+          org-name: my_org
+          repo-name: my_repo
+          branch-name: main
+          workflow-name: BUILD_PARAM
+          test-type: Junit
+          test-result-location: junit-service*
+          parameters: '{"ENV_NAME":"TEST"}'
+
+----
+
+== License
+
+This code is made available under the 
+link:https://opensource.org/license/mit/[MIT license].
+
+== References
+
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform-actions/latest/[using actions in CloudBees workflows].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform/latest/[the CloudBees platform].
