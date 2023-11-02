@@ -73,7 +73,7 @@ jobs:
   run-gha-workflow:
     steps:
       - name: Run GHA workflow
-        uses: cloudbees.io/ghactions-run-workflow@v2
+        uses: cloudbees-io/ghactions-run-workflow@v2
         with:
           url: ${{ vars.GITHUB_URL }}
           token: ${{ secrets.GHA_TOKEN }}
