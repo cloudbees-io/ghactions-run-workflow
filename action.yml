@@ -36,7 +36,7 @@ runs:
   steps:
     - id: invoke-github-job
       name: invoke-github-job
-      uses: docker://registry.saas-dev.beescloud.com/staging/github-actions:main-4a5a91f094e11ab2920252d408e9e8bebad6104b
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/github-actions:main-4a5a91f094e11ab2920252d408e9e8bebad6104b
       shell: sh
       env:
         CONFIG_JSON: '{"metaInfo":{"url":"${{ inputs.url }}","toolType":"GITHUBACTIONS","username":"","password":"${{ inputs.token }}","orgname":"${{ inputs.org-name }}","reponame":"${{ inputs.repo-name }}","branchname":"${{ inputs.branch-name }}","jobName":"${{ inputs.workflow-name }}","testType":"${{ inputs.test-type }}","fileName":"${{ inputs.test-result-location }}","parameters":${{ inputs.parameters }}}}'
