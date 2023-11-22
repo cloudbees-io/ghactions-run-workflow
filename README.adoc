@@ -42,7 +42,7 @@ If not specified, uses `https://api.github.com`.
 | `workflow-name`
 | String
 | Yes
-| The GHA workflow name.
+| The GHA workflow name. (Note: this should  be picked from the name attribute defined within the target GHA yaml file)
 
 | `test-type`
 | String
