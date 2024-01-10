@@ -23,12 +23,15 @@ inputs:
     required: true
   test-type:  # id of input
     description: 'test type'
+    required: false
     default: ''
   test-result-location:  # id of input
     description: 'test result location'
+    required: false
     default: ''
   parameters:  # id of input
     description: 'parameters as json'
+    required: false
     default: '{}'
   
 runs:
@@ -36,17 +39,17 @@ runs:
   steps:
     - id: invoke-github-job
       name: invoke-github-job
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/github-actions:main-4a5a91f094e11ab2920252d408e9e8bebad6104b
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/github-actions:main-ef7a022ef4a2ef8365fd147fd7a1fc4f963d6599
       shell: sh
       env:
-        CONFIG_JSON: '{"metaInfo":{"url":"${{ inputs.url }}","toolType":"GITHUBACTIONS","username":"","password":"${{ inputs.token }}","orgname":"${{ inputs.org-name }}","reponame":"${{ inputs.repo-name }}","branchname":"${{ inputs.branch-name }}","jobName":"${{ inputs.workflow-name }}","testType":"${{ inputs.test-type }}","fileName":"${{ inputs.test-result-location }}","parameters":${{ inputs.parameters }}}}'
         RUN_ID: ${{ cloudbees.run_id }}
         JOB_ID: ${{ job.id }}
-        STEP_ID: ${{step.internal.id}}
+        STEP_ID: ${{ step.internal.id }}
         DNS_URL: ${{ cloudbees.api.url }}
         JWT_TOKEN: ${{ cloudbees.api.token }}
       run: |
         set -x
         cd /app
-        ./github_actions_app invoke -b $CONFIG_JSON
+        ./github_actions_app invoke -b '{"metaInfo":{"url":"${{ inputs.url }}","toolType":"GITHUBACTIONS","username":"","password":"${{ inputs.token }}","orgname":"${{ inputs.org-name }}","reponame":"${{ inputs.repo-name }}","branchname":"${{ inputs.branch-name }}","jobName":"${{ inputs.workflow-name }}","testType":"${{ inputs.test-type }}","fileName":"${{ inputs.test-result-location }}","parameters":${{ inputs.parameters }}}}'
+        
         
