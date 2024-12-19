@@ -39,7 +39,7 @@ runs:
   steps:
     - id: invoke-github-job
       name: invoke-github-job
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/github-actions:main-ffc901cf3ca6adf7d47f7002eeb0b0260ff5cc01
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/github-actions:main-1ba1699fa725630f5445445b840f037de9dc4afe
       shell: sh
       env:
         RUN_ID: ${{ cloudbees.run_id }}
