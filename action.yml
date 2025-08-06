@@ -33,7 +33,10 @@ inputs:
     description: 'parameters as json'
     required: false
     default: '{}'
-  
+outputs:
+  run-id:
+    description: The run id of the triggered Github actions.
+    value: ${{steps.invoke-github-job.outputs.run-id}}
 runs:
   using: composite
   steps:
